@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tvName"
+        android:text="@string/name"
+        android:textSize="@dimen/size_30sp"
+        />
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/etName"
+        android:hint="Name"
+        android:textSize="@dimen/size_30sp"
+        android:layout_below="@id/tvName"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tvRollNo"
+        android:text="@string/rollno"
+        android:inputType="textPersonName"
+        android:textSize="@dimen/size_25sp"
+        android:layout_below="@id/etName"
+        />
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/etRollNo"
+        android:hint="Roll NO"
+        android:inputType="number"
+        android:digits="1234567890"
+        android:textSize="@dimen/size_30sp"
+        android:layout_below="@id/tvRollNo"
+        />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnAdd"
+        android:layout_gravity="center"
+        android:layout_margin="@dimen/margin_10dp"
+        android:text="@string/add"
+        android:layout_below="@id/etRollNo"
+        android:layout_centerHorizontal="true"/>
+</RelativeLayout>
