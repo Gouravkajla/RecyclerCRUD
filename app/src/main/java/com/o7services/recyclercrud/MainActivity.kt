@@ -33,14 +33,13 @@ class MainActivity : AppCompatActivity(),UserInterface{
                 }else{
                     studentlist.add(StudentModle(dialogBinding.etName.text.toString(), dialogBinding.etRollNo.text.toString()))
                      studentAdapter.notifyDataSetChanged()
-                    customDialog.dismiss()
-
+                     customDialog.dismiss()
                 }
+
             }
             customDialog.show()
         }
     }
-
 
     override fun listUpdate(position: Int) {
         val customDialog1=Dialog(this)
@@ -50,13 +49,13 @@ class MainActivity : AppCompatActivity(),UserInterface{
             if (dialogBinding1.etName.text.isEmpty()){
                 dialogBinding1.etName.error="Enter Your Name"
             }else if (dialogBinding1.etRollNo.text.isEmpty()){
-                dialogBinding1.etRollNo.error="Enetr your Roll No"
+                dialogBinding1.etRollNo.error="Enter your Roll No"
             }else{
                 studentlist.set(position,
                     StudentModle(dialogBinding1.etName.text.toString(),dialogBinding1.etRollNo.text.toString())
                 )
                 studentAdapter.notifyDataSetChanged()
-                customDialog1.show()
+                customDialog1.dismiss()
             }
             dialogBinding1.btnDelete.setOnClickListener {
                 if (dialogBinding1.etName.text.toString().isEmpty()){
@@ -71,9 +70,11 @@ class MainActivity : AppCompatActivity(),UserInterface{
                     customDialog1.dismiss()
                 }
             }
-            customDialog1.show()
 
         }
+        customDialog1.show()
 
     }
+
+
 }
