@@ -6,8 +6,9 @@ import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.o7services.recyclercrud.databinding.ActivityMainBinding
 import com.o7services.recyclercrud.databinding.AddLayoutBinding
+import com.o7services.recyclercrud.databinding.EditLayoutBinding
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(),UserInterface{
     lateinit var binding:ActivityMainBinding
    lateinit var studentAdapter: StudentAdapter
    var studentlist=ArrayList<StudentModle>()
@@ -16,7 +17,7 @@ class MainActivity : AppCompatActivity() {
 
         binding=ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-                studentAdapter= StudentAdapter(studentlist)
+                studentAdapter= StudentAdapter(studentlist,this)
                 binding.rycList.layoutManager=LinearLayoutManager(this)
                 binding.rycList.adapter=studentAdapter
         binding.ftnAdd.setOnClickListener{
@@ -36,12 +37,43 @@ class MainActivity : AppCompatActivity() {
 
                 }
             }
+            customDialog.show()
+        }
+    }
 
 
-              customDialog.show()
-
-
+    override fun listUpdate(position: Int) {
+        val customDialog1=Dialog(this)
+        val dialogBinding1=EditLayoutBinding.inflate(layoutInflater)
+        customDialog1.setContentView(dialogBinding1.root)
+        dialogBinding1.btnEdit.setOnClickListener {
+            if (dialogBinding1.etName.text.isEmpty()){
+                dialogBinding1.etName.error="Enter Your Name"
+            }else if (dialogBinding1.etRollNo.text.isEmpty()){
+                dialogBinding1.etRollNo.error="Enetr your Roll No"
+            }else{
+                studentlist.set(position,
+                    StudentModle(dialogBinding1.etName.text.toString(),dialogBinding1.etRollNo.text.toString())
+                )
+                studentAdapter.notifyDataSetChanged()
+                customDialog1.show()
+            }
+            dialogBinding1.btnDelete.setOnClickListener {
+                if (dialogBinding1.etName.text.toString().isEmpty()){
+                    dialogBinding1.etName.error="Enter Your  name"
+                }
+                else if (dialogBinding1.etRollNo.text.toString().isEmpty()){
+                    dialogBinding1.etRollNo.error="Enter Your Rollno"
+                }
+                else{
+                    studentlist.remove(StudentModle(dialogBinding1.etName.text.toString(),dialogBinding1.etRollNo.text.toString()))
+                    studentAdapter.notifyDataSetChanged()
+                    customDialog1.dismiss()
+                }
+            }
+            customDialog1.show()
 
         }
+
     }
 }

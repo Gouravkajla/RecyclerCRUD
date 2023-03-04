@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.o7services.recyclercrud.databinding.ItemRvLayoutBinding
 
-class StudentAdapter(val studentList:ArrayList<StudentModle>):RecyclerView.Adapter<StudentAdapter.viewHolder>(){
+class StudentAdapter(val studentList:ArrayList<StudentModle>, var list:UserInterface):RecyclerView.Adapter<StudentAdapter.viewHolder>(){
     class viewHolder (val binding:ItemRvLayoutBinding):RecyclerView.ViewHolder(binding.root){
 
     }
@@ -14,11 +14,15 @@ class StudentAdapter(val studentList:ArrayList<StudentModle>):RecyclerView.Adapt
         val binding=ItemRvLayoutBinding.inflate(LayoutInflater.from(parent.context),parent,false)
         return viewHolder(binding)
 
+
     }
 
     override fun onBindViewHolder(holder: viewHolder, position: Int) {
     holder.binding.tvName.text=studentList[position].name
     holder.binding.tvRollNo.text=studentList[position].rollno
+    holder.itemView.setOnClickListener {
+        list.listUpdate(position)
+    }
 
     }
 
