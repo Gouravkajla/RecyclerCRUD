@@ -4,6 +4,8 @@ import android.app.Dialog
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 import com.o7services.recyclercrud.databinding.ActivityMainBinding
 import com.o7services.recyclercrud.databinding.AddLayoutBinding
 import com.o7services.recyclercrud.databinding.EditLayoutBinding
@@ -11,15 +13,18 @@ import com.o7services.recyclercrud.databinding.EditLayoutBinding
 class MainActivity : AppCompatActivity(),UserInterface{
     lateinit var binding:ActivityMainBinding
    lateinit var studentAdapter: StudentAdapter
+    val db=Firebase.firestore
    var studentlist=ArrayList<StudentModle>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         binding=ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
                 studentAdapter= StudentAdapter(studentlist,this)
                 binding.rycList.layoutManager=LinearLayoutManager(this)
                 binding.rycList.adapter=studentAdapter
+
         binding.ftnAdd.setOnClickListener{
             val customDialog=Dialog(this)
             val dialogBinding=AddLayoutBinding.inflate(layoutInflater)
@@ -31,11 +36,15 @@ class MainActivity : AppCompatActivity(),UserInterface{
                     dialogBinding.etRollNo.error="Enter Your Roll number"
 
                 }else{
-                    studentlist.add(StudentModle(dialogBinding.etName.text.toString(), dialogBinding.etRollNo.text.toString()))
-                     studentAdapter.notifyDataSetChanged()
+
+                   
+                    studentAdapter.notifyDataSetChanged()
+
+                    db.collection("User")
+                        .add(StudentModle(dialogBinding.etName.text.toString(), dialogBinding.etRollNo.text.toString()))
+                        .addOnSuccessListener {  }
                      customDialog.dismiss()
                 }
-
             }
             customDialog.show()
         }
@@ -54,6 +63,7 @@ class MainActivity : AppCompatActivity(),UserInterface{
                 studentlist.set(position,
                     StudentModle(dialogBinding1.etName.text.toString(),dialogBinding1.etRollNo.text.toString())
                 )
+
                 studentAdapter.notifyDataSetChanged()
                 customDialog1.dismiss()
             }
