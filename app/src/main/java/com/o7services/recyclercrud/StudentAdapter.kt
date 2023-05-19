@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.o7services.recyclercrud.databinding.ItemRvLayoutBinding
 
-class StudentAdapter(val studentList:ArrayList<StudentModle>, var list:UserInterface):RecyclerView.Adapter<StudentAdapter.viewHolder>(){
+class StudentAdapter(val studentList:ArrayList<StudentModel>, var list:UserInterface):RecyclerView.Adapter<StudentAdapter.viewHolder>(){
     class viewHolder (val binding:ItemRvLayoutBinding):RecyclerView.ViewHolder(binding.root){
 
     }

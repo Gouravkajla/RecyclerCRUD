@@ -5,8 +5,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
-
+<EditText
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:hint="Search bar"
+    android:singleLine="true"
+    android:maxLines="1"
+    android:id="@+id/etSearch"
+    />
    <androidx.recyclerview.widget.RecyclerView
+     android:layout_below="@id/etSearch"
        android:layout_width="wrap_content"
        android:layout_height="wrap_content"
        android:id="@+id/rycList"
